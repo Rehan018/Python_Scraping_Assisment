@@ -24,7 +24,7 @@ def fetch_users_data(app_id):
             # Ensure user_id and full_name are not None
             if user_id is not None and full_name.strip() != "":
                 user_data = {"user_id": user_id, "full_name": full_name.strip(), "email": email}
-                db.posts_collection.insert_one(user_data)
+                db.users_collection.insert_one(user_data)
     else:
         print("Failed to fetch users data")
 

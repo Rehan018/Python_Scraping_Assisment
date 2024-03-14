@@ -1,3 +1,4 @@
+import requests
 from part_a.database import connect_to_mongodb
 
 def fetch_posts_data(app_id):
@@ -5,7 +6,7 @@ def fetch_posts_data(app_id):
     db = connect_to_mongodb()
 
     # Fetch users from the users collection
-    users_collection = db.users
+    users_collection = db.users_collection  # Assuming the collection name is users_collection
     users = users_collection.find()
 
     for user in users:
@@ -14,7 +15,7 @@ def fetch_posts_data(app_id):
         headers = {"app-id": app_id}
 
         response = requests.get(api_url, headers=headers)
-        if response.status_code==200:
+        if response.status_code == 200:
             posts_data = response.json().get("data", [])
             for post in posts_data:
                 print(post)
@@ -25,11 +26,10 @@ def fetch_posts_data(app_id):
                     "created_at": post.get("publishDate", None),
                     # Add more fields as needed
                 }
-                db.posts_collection.insert_one(post_data)
-        # Process each user as needed
+                db.post_collection.insert_one(post_data)
+                print(post_data)
         else:
             print(f"Failed to fetch posts data for user {user_id}")
-        print(user)
 
     # Close database connection
     db.client.close()
