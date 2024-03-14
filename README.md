@@ -1,50 +1,82 @@
 **Task Report: Data Scraping and Database Interaction**
 
 **Objective:**
-The objective of this task was to develop a Python application that scrapes data from a website and stores it in a MongoDB database. The task is divided into two parts:
+The objective of this task was to develop a Python application that scrapes data from a website and an external API, then stores it in a MongoDB database. The task is divided into two parts:
 
-1. **Part A**: Scraping user data from an external API and storing it in a MongoDB database.
-2. **Part B**: Scraping book data from a website and storing it in a MongoDB database.
-
-**Functional Requirements:**
-
-1. **Login to the website and create an app_id:** This step is required to obtain an API key (app_id) to access the APIs.
-2. **Fetch Users data:** The users' data is fetched using the API endpoint `https://dummyapi.io/data/v1/user` and stored in the users table of the database.
-3. **Fetch users' posts data:** For each user fetched in the previous step, their corresponding posts data is fetched using the API endpoint `https://dummyapi.io/data/v1/user/{{user_id}}/post`. This data is then stored in the database.
+1. **Part A:** Scraping user data from an external API and storing it in a MongoDB database.
+2. **Part B:** Scraping book data from a website and storing it in a MongoDB database.
 
 **Functional Requirements:**
-1. **Scrape Books Data:** All attributes of books, including name, price, availability, and ratings, from all 50 pages of the website are scraped.
-2. **Store Data in Database:** The scraped data is stored in the database.
 
+1. **Login to the website and create an app_id:** Obtain an API key (app_id) to access the APIs.
+2. **Fetch Users Data:** Fetch users' data from the API endpoint `https://dummyapi.io/data/v1/user` and store it in the users table of the database.
+3. **Fetch Users' Posts Data:** For each user fetched, retrieve their corresponding posts data using the API endpoint `https://dummyapi.io/data/v1/user/{{user_id}}/post`. Store this data in the database.
 
 **Approach:**
-The task was approached in a structured manner, with each part of the task divided into separate modules and scripts. The approach followed is outlined below:
+The task was approached systematically, with each part divided into distinct modules and scripts. Here's how the approach was implemented:
 
 1. **Part A:**
-    - **Database Setup:** First, a MongoDB database connection function was created to establish a connection with the MongoDB server.
-    - **Fetch Users Data:** A script was developed to fetch user data from an external API using the requests library. The fetched data was then processed and stored in the MongoDB database using PyMongo.
+   - **Database Setup:** Establish a connection with the MongoDB server using a connection function.
+   - **Fetch Users Data:** Develop a script to fetch user data from the API using the requests library. Process and store this data in the MongoDB database using PyMongo.
 
 2. **Part B:**
-    - **Database Setup:** Similar to Part A, a MongoDB connection function was created to establish a connection with the MongoDB server.
-    - **Scrape Books Data:** Using the BeautifulSoup library, book data was scraped from a website. The scraped data was processed and stored in the MongoDB database.
+   - **Database Setup:** Create a MongoDB connection function to establish a connection with the server.
+   - **Scrape Books Data:** Utilize BeautifulSoup for scraping book data from the website. Process the scraped data and store it in the MongoDB database.
 
 **Challenges:**
-During the development of the application, the following challenges were encountered:
-- **Data Parsing:** Parsing the scraped data accurately and extracting relevant information required careful handling, especially dealing with nested HTML structures.
-- **Database Interaction:** Ensuring proper interaction with the MongoDB database, including establishing connections, inserting data, and closing connections, required attention to detail.
+During development, several challenges were encountered, including:
+- Accurate parsing of scraped data, especially dealing with nested HTML structures.
+- Ensuring proper interaction with the MongoDB database, including data insertion and connection handling.
 
 **Solution:**
-To address the challenges faced during development, the following solutions were implemented:
-- **Robust Data Processing:** Utilizing BeautifulSoup for HTML parsing and implementing robust data processing techniques ensured accurate extraction of required information from the website.
-- **Modular Code Structure:** Dividing the application into separate modules for database interaction, data scraping, and main execution allowed for better organization and easier debugging.
+To overcome these challenges, the following solutions were implemented:
+- Robust data processing techniques using BeautifulSoup for accurate extraction of relevant information from the website.
+- Modular code structure, with separate modules for database interaction, data scraping, and main execution, facilitating better organization and debugging.
 
 **Conclusion:**
-Overall, the task was successfully completed, with data scraped from both the external API and the website and stored in the MongoDB database. The modular approach to development ensured code reusability and maintainability. Moving forward, the application can be further enhanced by implementing error handling mechanisms, logging, and additional features as per requirements.
+The task was completed successfully, with data scraped from both the external API and the website and stored in the MongoDB database. The modular approach ensured code reusability and maintainability, laying a solid foundation for future enhancements.
 
 **Recommendation:**
-To improve the application's robustness, it is recommended to implement error handling mechanisms to handle exceptions gracefully during data scraping and database interaction. Additionally, incorporating logging functionality would aid in debugging and monitoring the application's behavior.
+To improve the application's robustness, implementing error handling mechanisms and logging functionality is recommended. This would aid in debugging and monitoring the application's behavior, especially during data scraping and database interaction.
 
 **Future Work:**
-<h3>In future iterations, the application can be extended to include features such as data validation, update functionalities for existing records, and scheduling automated data scraping tasks. Additionally, implementing a user interface or API endpoints for interacting with the database can enhance the application's usability.
-</h3>
-<h3>This task provided valuable experience in web scraping, database interaction, and modular application development, laying the foundation for building more complex data-driven applications in the future.</h3>
+Future iterations of the application could include features such as data validation, update functionalities for existing records, and scheduling automated data scraping tasks. Additionally, implementing a user interface or API endpoints for interacting with the database would enhance usability and functionality. This task provided valuable experience in web scraping, database interaction, and modular application development, setting the stage for building more complex data-driven applications in the future.
+
+**How to Run the Code in Your Local Machine:**
+To run the code on your local machine, follow these steps:
+
+1. Install Python: If you haven't already, install Python on your machine. You can download Python from the official website: https://www.python.org/downloads/
+
+2. Install Required Libraries: Use pip, the package installer for Python, to install the required libraries. Run the following commands in your terminal or command prompt:
+   ```
+   pip install pymongo requests beautifulsoup4
+   ```
+
+3. Clone the Repository: Clone the repository containing the code to your local machine using Git:
+   ```
+   git clone <repository-url>
+   ```
+
+4. Navigate to the Project Directory: Use the `cd` command to navigate to the directory where you cloned the repository:
+   ```
+   cd <project-directory>
+   ```
+
+5. Run the Python Scripts: Execute the Python scripts for Part A and Part B by running the following commands:
+   ```
+   python part_a/fetch_users.py
+   python part_a/fetch_posts.py
+   python part_b/scrape_books.py
+   ```
+6. Or Use Simple Command:
+   ```
+    python main.py
+   ```
+
+   Make sure to replace `<repository-url>` and `<project-directory>` with the actual URL of the repository and the directory where you cloned the repository, respectively.
+
+6. Provide App ID: For Part A, you'll need to provide an app_id to access the external API. Update the `app_id` variable in the `fetch_users.py` and `fetch_posts.py` scripts with your own app_id obtained from the API provider.
+
+7. Verify Data: After running the scripts, verify that the data has been successfully scraped and stored in the MongoDB database. You can use a MongoDB client or shell to connect to the database and inspect the collections.
+
+By following these steps, you should be able to run the code successfully on your local machine and interact with the MongoDB database containing the scraped data.
